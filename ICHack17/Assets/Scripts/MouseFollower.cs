@@ -4,7 +4,16 @@ using UnityEngine.Networking;
 public class MouseFollower : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        Color color = Random.ColorHSV();
+        color.a = 1f;
+
+        GetComponent<SpriteRenderer>().color = color;
+        CmdSetColor(color);
+    }
+
+    [Command]
+    void CmdSetColor(Color color) {
+        GetComponent<SpriteRenderer>().color = color;
     }
 
     void Update () {
