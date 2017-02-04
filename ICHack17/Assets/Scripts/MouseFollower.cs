@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class MouseFollower : MonoBehaviour {
+public class MouseFollower : NetworkBehaviour {
 
 	void Update () {
-        if (Network.isClient) {
+        if (!isLocalPlayer) {
             var v3 = Input.mousePosition;
             v3.z = 10.0f;
             v3 = Camera.main.ScreenToWorldPoint(v3);
