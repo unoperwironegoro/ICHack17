@@ -3,42 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MouseChaser : NetworkBehaviour {
-   
+public class PlaneBehaviour : NetworkBehaviour {
+
     public float maxSpeed = 5f;
     public float deceleration = 0.3f;
     public float tightness = 100;
     private Rigidbody2D rb2d;
-    public float sleepTime;
     public GameObject mouse { set; private get; }
+    public GameObject bulletPrefab;
 
-    /* car things */
-    private int lap = 0;
-    private static int WIN_LAPS = 2;
-    bool canLap = true;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rb2d = GetComponent<Rigidbody2D>();
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if(!isServer) {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (mouse.GetComponent<MouseController>().isDown)
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, rb2d.transform.position, Quaternion.Euler(0, 0, 0));
+            NetworkServer.Spawn(bulletObj);
+            bulletObj.GetComponent<Rigidbody2D>().velocity = rb2d.velocity.normalized * 5;
+            bulletObj.GetComponent<bulletBehaviour>().owner = gameObject;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!isServer)
+        {
             return;
         }
 
         var mouseVec = mouse.transform.position;
 
         var moveVec = mouseVec - transform.position;
-
-        if (sleepTime > 0)
-        {
-            sleepTime -= Time.fixedDeltaTime;
-            float angle = Mathf.Atan2(moveVec.y, moveVec.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-            return;
-        }
 
         /* If the object is far then apply a force */
         if (moveVec.magnitude > 1)
@@ -67,37 +67,13 @@ public class MouseChaser : NetworkBehaviour {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
     }
-    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (sleepTime > 0 && (collision.gameObject.layer == LayerMask.NameToLayer("Car" )))
+        if (collision.gameObject.GetComponent<bulletBehaviour>().owner == gameObject)
         {
             return;
         }
-        rb2d.AddForce(rb2d.velocity * -100);
-        sleepTime = 1;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (rb2d.velocity.x > 0)
-        {
-            if (canLap)
-            {
-                if  (lap >= WIN_LAPS)
-                {
-                    Debug.Log("ayyyyyyy");
-                }
-            }
-           
-            lap++;
-            canLap = true;
-        }
-        else
-        {
-            canLap = false;
-        }
-       
+        NetworkServer.Destroy(gameObject);
     }
 }
