@@ -5,8 +5,14 @@ public class MouseController : NetworkBehaviour {
     // Exists on the Server only
     public Color colour = Color.white;
     public float score = 0f;
+    public bool isDown = false;
 
     private SpriteRenderer sr;
+
+    private void Update()
+    {
+        isDown = Input.GetMouseButtonDown(0);
+    }
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
