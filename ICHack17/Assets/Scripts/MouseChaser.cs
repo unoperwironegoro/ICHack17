@@ -66,6 +66,10 @@ public class MouseChaser : NetworkBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (sleepTime > 0 && (collision.gameObject.layer == LayerMask.NameToLayer("Car" )))
+        {
+            return;
+        }
         rb2d.AddForce(rb2d.velocity * -100);
         sleepTime = 1;
     }
