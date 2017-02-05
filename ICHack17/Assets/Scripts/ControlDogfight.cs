@@ -23,8 +23,8 @@ public class ControlDogfight : NetworkBehaviour {
         {
             GameObject planeObj = Instantiate(planePrefab, startPos + new Vector3(i * 3, 0, 0), Quaternion.Euler(0, 0, 0));
             planeObj.GetComponent<PlaneBehaviour>().mouse = g;
-            planeObj.GetComponent<SpriteRenderer>().color = g.GetComponent<MouseController>().colour;
             NetworkServer.Spawn(planeObj);
+            planeObj.GetComponent<SpriteRenderer>().color = g.GetComponent<MouseController>().colour;
             i++;
         }
     }

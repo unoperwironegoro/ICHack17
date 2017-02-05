@@ -8,6 +8,7 @@ public class MouseController : NetworkBehaviour {
     }
 
     public float score = 0f;
+    [HideInInspector]
     public bool isDown = false;
 
     private SpriteRenderer sr;

@@ -86,4 +86,13 @@ public class PlaneBehaviour : NetworkBehaviour {
         }
         NetworkServer.Destroy(gameObject);
     }
+
+    [SyncVar(hook = "OnColorChanged")]
+    Color myColor;
+
+    void OnColorChanged(Color value)
+    {
+        myColor = value;
+        GetComponent<SpriteRenderer>().color = myColor;
+    }
 }
