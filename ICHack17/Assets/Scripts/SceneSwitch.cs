@@ -15,10 +15,10 @@ public class SceneSwitch : MonoBehaviour {
             return;
         }
 
-        if (fadeTime > 0) {
-            fadeTime -= Time.deltaTime;
+        if (switchTimer > 0) {
+            switchTimer -= Time.deltaTime;
         } else {
-            fadeTime = 0;
+            switchTimer = 0;
             if (serverSwitch) {
                 NetworkSceneSwitcher.instance.Switch(nextSceneName);
             } else {

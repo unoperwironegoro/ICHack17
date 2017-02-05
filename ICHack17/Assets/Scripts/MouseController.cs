@@ -43,7 +43,6 @@ public class MouseController : NetworkBehaviour {
                 mouse.GetComponent<MouseController>().CmdSendColor();
         }
 
-        this.colour = color;
         sr.color = color;
         RpcSetColor(color);
     }
