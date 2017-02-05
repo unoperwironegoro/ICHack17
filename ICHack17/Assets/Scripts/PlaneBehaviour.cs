@@ -80,6 +80,10 @@ public class PlaneBehaviour : NetworkBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(!isServer) {
+            return;
+        }
+
         if (collision.gameObject.GetComponent<bulletBehaviour>().owner == gameObject)
         {
             return;
