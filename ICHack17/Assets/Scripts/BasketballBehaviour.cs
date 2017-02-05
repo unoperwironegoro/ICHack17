@@ -4,41 +4,73 @@ using UnityEngine;
 
 public class BasketballBehaviour : MonoBehaviour {
 
+
+
     private Vector3 screenPoint;
+
     Vector3 startPosition;
-    private Rigidbody2D rb2d;
-    private bool isDown = false;
-    public GameObject mouse { set; private get; }
+
 
 
     // Use this for initialization
-    void Start() {
-        rb2d = GetComponent<Rigidbody2D>();                
+
+    void Start()
+    {
+
+
+
     }
 
-   
-    private Vector3 offset;
 
-    void OnMouseDown()
+
+    // Update is called once per frame
+
+    void Update()
     {
+
+    }
+
+
+
+    private void OnMouseDown()
+    {
+
         startPosition = Input.mousePosition;
+
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+
+
+
     }
 
-    void OnMouseDrag()
+
+
+    private void OnMouseDrag()
     {
-        Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
-        transform.position = Camera.main.ScreenToWorldPoint(newPosition) + offset;
+
+        Vector3 curScreenPoint =
+
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+
+        transform.position = curPosition;
+
     }
 
-    void OnMouseUp()
+
+
+    private void OnMouseUp()
     {
-        Vector3 newPosition = mouse.transform.position;
-        // The times 5 is to make the force stronger.
+
+        Vector3 newPosition = Input.mousePosition;
+
         GetComponent<Rigidbody2D>().AddForce((newPosition - startPosition) * 5,
+
             ForceMode2D.Force);
 
     }
 
-}
 
+
+}
