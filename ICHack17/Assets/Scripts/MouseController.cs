@@ -3,7 +3,10 @@ using UnityEngine.Networking;
 
 public class MouseController : NetworkBehaviour {
     // Exists on the Server only
-    public Color colour = Color.white;
+    public Color colour {
+        get { return sr.color; }
+    }
+
     public float score = 0f;
     public bool isDown = false;
 
