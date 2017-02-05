@@ -13,14 +13,15 @@ public class HoopBehaviour : MonoBehaviour {
 
     public Text scoreDisplay;
 
-    // Use this for initialization
+       // Use this for initialization
     void Start () {
+        scoreDisplay.text = " ";
         setDisplay ();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        setDisplay();
+        
 	}
 
     void OnTriggerEnter2D(Collider2D obj) {
@@ -31,9 +32,10 @@ public class HoopBehaviour : MonoBehaviour {
             greenCount++;
         } else if (obj.gameObject.CompareTag("Orange")) {
             orangeCount++;
-        } else { 
+        } else if (obj.gameObject.CompareTag("Blue")){ 
             blueCount++; 
         }
+       
         setDisplay();
         
     }
@@ -43,5 +45,6 @@ public class HoopBehaviour : MonoBehaviour {
                            " Blue: " + blueCount.ToString() +
                            " Green: " + greenCount.ToString() +
                            " Orange: " + orangeCount.ToString();
+        
     }
 }

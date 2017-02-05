@@ -5,7 +5,6 @@ using UnityEngine;
 public class BasketballBehaviour : MonoBehaviour {
 
     private Vector3 screenPoint;
-    private Vector3 offset;
     Vector3 startPosition;
 
     // Use this for initialization
@@ -20,8 +19,6 @@ public class BasketballBehaviour : MonoBehaviour {
     private void OnMouseDown() {
         startPosition = Input.mousePosition;
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }
 
     private void OnMouseDrag() {
