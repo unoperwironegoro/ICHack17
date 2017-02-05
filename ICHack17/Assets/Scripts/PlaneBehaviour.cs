@@ -11,6 +11,7 @@ public class PlaneBehaviour : NetworkBehaviour {
     private Rigidbody2D rb2d;
     public GameObject mouse { set; private get; }
     public GameObject bulletPrefab;
+    private bool hasFired = false;
 
     // Use this for initialization
     void Start () {
@@ -22,11 +23,19 @@ public class PlaneBehaviour : NetworkBehaviour {
     {
         if (mouse.GetComponent<MouseController>().isDown)
         {
-            GameObject bulletObj = Instantiate(bulletPrefab, rb2d.transform.position, Quaternion.Euler(0, 0, 0));
-            NetworkServer.Spawn(bulletObj);
-            bulletObj.GetComponent<Rigidbody2D>().velocity = rb2d.velocity.normalized * 5;
-            bulletObj.GetComponent<bulletBehaviour>().owner = gameObject;
-            bulletObj.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
+            if (!hasFired)
+            {
+                GameObject bulletObj = Instantiate(bulletPrefab, rb2d.transform.position, Quaternion.Euler(0, 0, 0));
+                NetworkServer.Spawn(bulletObj);
+                bulletObj.GetComponent<Rigidbody2D>().velocity = rb2d.velocity.normalized * 5;
+                bulletObj.GetComponent<bulletBehaviour>().owner = gameObject;
+                bulletObj.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
+                hasFired = true;
+            }
+        }
+        else
+        {
+            hasFired = false;
         }
     }
 

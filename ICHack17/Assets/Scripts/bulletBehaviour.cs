@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class bulletBehaviour : MonoBehaviour {
+public class bulletBehaviour : NetworkBehaviour {
 
     public GameObject owner;
 
