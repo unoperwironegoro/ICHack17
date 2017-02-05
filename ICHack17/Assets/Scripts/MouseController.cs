@@ -15,7 +15,8 @@ public class MouseController : NetworkBehaviour {
 
     private void Update()
     {
-        isDown = Input.GetMouseButtonDown(0);
+        if(hasAuthority)
+            isDown = Input.GetMouseButtonDown(0);
     }
 
     void Awake() {
