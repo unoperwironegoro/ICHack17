@@ -26,6 +26,7 @@ public class PlaneBehaviour : NetworkBehaviour {
             NetworkServer.Spawn(bulletObj);
             bulletObj.GetComponent<Rigidbody2D>().velocity = rb2d.velocity.normalized * 5;
             bulletObj.GetComponent<bulletBehaviour>().owner = gameObject;
+            bulletObj.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
         }
     }
 
