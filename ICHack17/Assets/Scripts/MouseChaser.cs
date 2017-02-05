@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MouseChaser : MonoBehaviour {
+public class MouseChaser : NetworkBehaviour {
    
     public float maxSpeed = 5f;
     public float deceleration = 0.3f;
@@ -18,6 +19,10 @@ public class MouseChaser : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if(!isLocalPlayer) {
+            return;
+        }
+
         var mouseVec = mouse.transform.position;
         mouseVec.z = 10.0f;
         mouseVec = Camera.main.ScreenToWorldPoint(mouseVec);
