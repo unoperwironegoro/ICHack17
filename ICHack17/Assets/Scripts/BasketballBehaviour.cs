@@ -22,8 +22,7 @@ public class BasketballBehaviour : MonoBehaviour {
     void OnMouseDown()
     {
         startPosition = Input.mousePosition;
-        offset = gameObject.transform.position -
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
     }
 
     void OnMouseDrag()
