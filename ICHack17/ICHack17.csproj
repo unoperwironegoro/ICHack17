@@ -76,8 +76,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BasketballBehaviour.cs" />
+    <Compile Include="Assets\Scripts\ControlRace.cs" />
     <Compile Include="Assets\Scripts\HoopBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Menu\LobbyController.cs" />
+    <Compile Include="Assets\Scripts\MouseChaser.cs" />
+    <Compile Include="Assets\Scripts\MouseCleaner.cs" />
+    <Compile Include="Assets\Scripts\MouseController.cs" />
     <Compile Include="Assets\Scripts\MouseFollower.cs" />
+    <Compile Include="Assets\Scripts\NetworkSceneSwitcher.cs" />
+    <Compile Include="Assets\Scripts\SceneSwitch.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\MenuShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

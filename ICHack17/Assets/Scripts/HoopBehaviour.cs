@@ -20,7 +20,7 @@ public class HoopBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        setDisplay();
 	}
 
     void OnTriggerEnter2D(Collider2D obj) {
