@@ -7,6 +7,9 @@ public class BasketballBehaviour : MonoBehaviour {
     private Vector3 screenPoint;
     Vector3 startPosition;
 
+    public Transform mouse { set; private get; }
+
+
     // Use this for initialization
     void Start() {
                 
@@ -14,6 +17,8 @@ public class BasketballBehaviour : MonoBehaviour {
 
     // Update is called once per frame
     void Update() { 
+
+        if ()
     }
 
     private void OnMouseDown() {
@@ -31,6 +36,7 @@ public class BasketballBehaviour : MonoBehaviour {
 
     private void OnMouseUp() {
         Vector3 newPosition = Input.mousePosition;
+        // The times 5 is to make the force stronger.
         GetComponent<Rigidbody2D>().AddForce((newPosition - startPosition)*5,
             ForceMode2D.Force);
     }
