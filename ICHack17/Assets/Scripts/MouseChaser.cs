@@ -9,6 +9,8 @@ public class MouseChaser : MonoBehaviour {
     public float deceleration = 0.3f;
     public float tightness = 100;
     private Rigidbody2D rb2d;
+    public float sleepTime;
+    public GameObject mouse { set; private get; }
 
 	// Use this for initialization
 	void Start () {
@@ -16,13 +18,20 @@ public class MouseChaser : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        var mouseVec = Input.mousePosition;
+	void FixedUpdate () {
+        var mouseVec = mouse.transform.position;
         mouseVec.z = 10.0f;
         mouseVec = Camera.main.ScreenToWorldPoint(mouseVec);
 
         var moveVec = mouseVec - transform.position;
 
+        if (sleepTime > 0)
+        {
+            sleepTime -= Time.fixedDeltaTime;
+            float angle = Mathf.Atan2(moveVec.y, moveVec.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            return;
+        }
         /* Old method which could be reused for following with a delay */
         /* Updates the speed based on distance to the pointer
         if (moveVec.magnitude > 2f)
@@ -53,6 +62,8 @@ public class MouseChaser : MonoBehaviour {
             {
                 rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
             }
+            float angle = Mathf.Atan2(moveVec.y, moveVec.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
         else
         {
@@ -65,6 +76,16 @@ public class MouseChaser : MonoBehaviour {
             {
                 rb2d.velocity = Vector2.zero;
             }
+            float angle = Mathf.Atan2(moveVec.y, moveVec.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         }
+    }
+    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Vector2 collisionAngle;
+        rb2d.AddForce(rb2d.velocity * -100);
+        sleepTime = 1;
     }
 }
