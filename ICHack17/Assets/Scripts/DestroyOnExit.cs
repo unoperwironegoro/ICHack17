@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DestroyOnExit : MonoBehaviour {
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D collider)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player"))
         {
             //Destroy(other.gameObject);
-            other.gameObject.SetActive(false);
-            Debug.Log("Hi");
+            collider.gameObject.SetActive(false);
+            Debug.Log("Collision!");
         }
     }
 }
