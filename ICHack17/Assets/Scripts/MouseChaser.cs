@@ -10,7 +10,7 @@ public class MouseChaser : NetworkBehaviour {
     public float tightness = 100;
     private Rigidbody2D rb2d;
     public float sleepTime;
-    public GameObject mouse { set; private get; }
+    public Transform mouse { set; private get; }
 
 	// Use this for initialization
 	void Start () {
@@ -19,13 +19,11 @@ public class MouseChaser : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        if(!isLocalPlayer) {
+        if(!isServer) {
             return;
         }
 
-        var mouseVec = mouse.transform.position;
-        mouseVec.z = 10.0f;
-        mouseVec = Camera.main.ScreenToWorldPoint(mouseVec);
+        var mouseVec = mouse.position;
 
         var moveVec = mouseVec - transform.position;
 
