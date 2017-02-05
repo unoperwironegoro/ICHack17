@@ -6,39 +6,40 @@ public class BasketballBehaviour : MonoBehaviour {
 
     private Vector3 screenPoint;
     Vector3 startPosition;
-
-    public Transform mouse { set; private get; }
+    private Rigidbody2D rb2d;
+    private bool isDown = false;
+    public GameObject mouse { set; private get; }
 
 
     // Use this for initialization
     void Start() {
-                
+        rb2d = GetComponent<Rigidbody2D>();                
     }
 
-    // Update is called once per frame
-    void Update() { 
+   
+    private Vector3 offset;
 
-        if ()
-    }
-
-    private void OnMouseDown() {
+    void OnMouseDown()
+    {
         startPosition = Input.mousePosition;
-        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-
+        offset = gameObject.transform.position -
+            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
     }
 
-    private void OnMouseDrag() {
-        Vector3 curScreenPoint = 
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-        transform.position = curPosition;
+    void OnMouseDrag()
+    {
+        Vector3 newPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
+        transform.position = Camera.main.ScreenToWorldPoint(newPosition) + offset;
     }
 
-    private void OnMouseUp() {
-        Vector3 newPosition = Input.mousePosition;
+    void OnMouseUp()
+    {
+        Vector3 newPosition = mouse.transform.position;
         // The times 5 is to make the force stronger.
-        GetComponent<Rigidbody2D>().AddForce((newPosition - startPosition)*5,
+        GetComponent<Rigidbody2D>().AddForce((newPosition - startPosition) * 5,
             ForceMode2D.Force);
+
     }
 
 }
+
