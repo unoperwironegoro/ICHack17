@@ -3,8 +3,13 @@ using UnityEngine.SceneManagement;
  
 public class SceneSwitch : MonoBehaviour {
     public string nextSceneName;
+    public bool serverSwitch;
 
     public void NextScene() {
-        SceneManager.LoadScene(nextSceneName);
+        if(serverSwitch) {
+            NetworkSceneSwitcher.instance.Switch(nextSceneName);
+        } else {
+            SceneManager.LoadScene(nextSceneName);
+        }
     }
 }
