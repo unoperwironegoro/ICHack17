@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseChaser : MonoBehaviour {
-
    
     public float maxSpeed = 5f;
     public float deceleration = 0.3f;
@@ -32,26 +31,6 @@ public class MouseChaser : MonoBehaviour {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             return;
         }
-        /* Old method which could be reused for following with a delay */
-        /* Updates the speed based on distance to the pointer
-        if (moveVec.magnitude > 2f)
-        {
-            if (curSpeed < maxSpeed)
-            {
-                curSpeed = curSpeed + acceleration;
-            }
-        }
-        else if (moveVec.magnitude > 0.05f)
-        {
-            if (curSpeed - acceleration > 0)
-              curSpeed = curSpeed - acceleration;
-        }
-        else
-        {
-            curSpeed = 0;
-        }
-        */
-        //  transform.position = (moveVec.normalized * curSpeed) + transform.position;
 
         /* If the object is far then apply a force */
         if (moveVec.magnitude > 1)
@@ -84,7 +63,6 @@ public class MouseChaser : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 collisionAngle;
         rb2d.AddForce(rb2d.velocity * -100);
         sleepTime = 1;
     }

@@ -2,8 +2,8 @@
 using UnityEngine.Networking;
 
 public class MouseController : NetworkBehaviour {
-    private Color colour = Color.white;
-    private float score = 0f;
+    public Color colour = Color.white;
+    public float score = 0f;
 
     private SpriteRenderer sr;
 

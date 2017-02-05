@@ -6,7 +6,6 @@ public class MouseCleaner : MonoBehaviour {
 	void Start () {
         Cursor.visible = true;
 
-        List<GameObject> toDestroy = new List<GameObject>();
         foreach (GameObject mouse in GameObject.FindGameObjectsWithTag("Mouse")) {
             if (mouse != gameObject) {
                 Destroy(mouse);
