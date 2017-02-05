@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 public class ControlRace : NetworkBehaviour {
     public GameObject carPrefab;
-    private Vector3 startPos = new Vector3(0, 0, 0);
+    private Vector3 startPos = new Vector3(0, 5, 0);
 
 	void Awake () {
         if(isLocalPlayer) {
@@ -15,7 +15,7 @@ public class ControlRace : NetworkBehaviour {
 
         int i = 0;
         foreach (GameObject g in mouseArray) {
-            GameObject carObj = Instantiate(carPrefab, startPos + new Vector3(i * 3, 0, 0), Quaternion.Euler(0, 0, 0));
+            GameObject carObj = Instantiate(carPrefab, startPos + new Vector3(i, 0, 0), Quaternion.Euler(0, 0, 0));
             carObj.GetComponent<MouseChaser>().mouse = g.transform;
             carObj.GetComponent<SpriteRenderer>().color = g.GetComponent<MouseController>().colour;
             NetworkServer.Spawn(carObj);

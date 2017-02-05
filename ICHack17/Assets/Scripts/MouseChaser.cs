@@ -12,6 +12,11 @@ public class MouseChaser : NetworkBehaviour {
     public float sleepTime;
     public Transform mouse { set; private get; }
 
+    /* car things */
+    private int lap = 0;
+    private static int WIN_LAPS = 2;
+    bool canLap = true;
+
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
@@ -72,5 +77,27 @@ public class MouseChaser : NetworkBehaviour {
         }
         rb2d.AddForce(rb2d.velocity * -100);
         sleepTime = 1;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (rb2d.velocity.x > 0)
+        {
+            if (canLap)
+            {
+                if  (lap >= WIN_LAPS)
+                {
+                    Debug.Log("ayyyyyyy");
+                }
+            }
+           
+            lap++;
+            canLap = true;
+        }
+        else
+        {
+            canLap = false;
+        }
+       
     }
 }
