@@ -26,6 +26,10 @@ public class HoopBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D obj) {
 
+        if (GetComponent<Rigidbody2D>().velocity.x < 0) {
+            return;
+        }
+
         if (obj.gameObject.CompareTag("Red")) {
             redCount++;
         } else if (obj.gameObject.CompareTag("Green")) {
