@@ -27,7 +27,6 @@ public class MouseController : NetworkBehaviour {
     public override void OnStartLocalPlayer() {
         Color color = Random.ColorHSV();
         color.a = 0.7f;
-        this.colour = color;
 
         CmdUpdateColors(color);
 
