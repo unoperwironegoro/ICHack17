@@ -5,20 +5,13 @@ public class sumoFollower : NetworkBehaviour {
 
     public float speed;
 
-    public override void OnStartLocalPlayer()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-     /*   Color color = Random.ColorHSV();
-        color.a = 1f;
-
-        GetComponent<SpriteRenderer>().color = color;
-        CmdSetColor(color); 
-        */
-    }
-
-    [Command]
-    void CmdSetColor(Color color)
-    {
-        GetComponent<SpriteRenderer>().color = color;
+        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -33,6 +26,14 @@ public class sumoFollower : NetworkBehaviour {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10.0f;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        if (mousePos.x < 0)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        } else
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
 
         Vector3 playerPos = transform.position;
 
