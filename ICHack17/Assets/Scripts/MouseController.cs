@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 
 public class MouseController : NetworkBehaviour {
+    // Exists on the Server only
     public Color colour = Color.white;
     public float score = 0f;
 
@@ -34,6 +35,7 @@ public class MouseController : NetworkBehaviour {
                 mouse.GetComponent<MouseController>().CmdSendColor();
         }
 
+        this.colour = color;
         sr.color = color;
         RpcSetColor(color);
     }
@@ -46,5 +48,10 @@ public class MouseController : NetworkBehaviour {
     [ClientRpc]
     void RpcSetColor(Color color) {
         sr.color = color;
+    }
+
+    [Command]
+    public void CmdWinPoint() {
+        score++;
     }
 }
