@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour {
-    public string nextSceneName;
+    private string nextSceneName;
     public bool serverSwitch;
     public Texture cutoffTex;
 

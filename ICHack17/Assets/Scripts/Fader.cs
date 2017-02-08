@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fader : MonoBehaviour {
     public static Fader instance;
 
-    private Renderer fader;
+    private Image fader;
     public float totalTime;
     public float idleTime;
     private bool switching;
@@ -14,10 +15,11 @@ public class Fader : MonoBehaviour {
     private float fadeTime;
 
     void Awake() {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject.transform.parent);
         instance = this;
         fadeTime = (totalTime - idleTime) / 2;
-        fader = GetComponentInChildren<Renderer>();
+        fader = GetComponentInChildren<Image>();
+        fader.material.SetFloat("_Cutoff", 0f);
     }
 
     void Update() {
