@@ -20,7 +20,7 @@ public class SceneSwitch : MonoBehaviour {
         } else {
             switchTimer = 0;
             if (serverSwitch) {
-                NetworkSceneSwitcher.instance.Switch(nextSceneName);
+                NetworkCalls.nm.ServerChangeScene(nextSceneName);
             } else {
                 SceneManager.LoadScene(nextSceneName);
             }
@@ -29,7 +29,7 @@ public class SceneSwitch : MonoBehaviour {
     }
 
     public void NextScene(string nextSceneName) {
-        if (serverSwitch && !NetworkSceneSwitcher.instance) {
+        if (serverSwitch && !NetworkCalls.nm) {
             return;
         }
         this.nextSceneName = nextSceneName;
@@ -39,7 +39,7 @@ public class SceneSwitch : MonoBehaviour {
     }
 
     public void NextScene() {
-        if (serverSwitch && !NetworkSceneSwitcher.instance) {
+        if (serverSwitch && !NetworkCalls.nm) {
             return;
         }
         Fader.instance.StartEffect(cutoffTex);
