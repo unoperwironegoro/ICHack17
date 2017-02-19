@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MouseCleaner : MonoBehaviour {
+public class GameCleaner : MonoBehaviour {
 	void Start () {
         Cursor.visible = true;
 
@@ -11,5 +12,7 @@ public class MouseCleaner : MonoBehaviour {
                 Destroy(mouse);
             }
         }
+
+        Destroy(NetworkManager.singleton.gameObject);
     }
 }

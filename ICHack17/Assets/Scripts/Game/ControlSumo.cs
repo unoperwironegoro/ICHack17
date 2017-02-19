@@ -21,7 +21,7 @@ public class ControlSumo : NetworkBehaviour
         {
             GameObject sumoObj = Instantiate(sumoPrefab, startPos + new Vector3(i * 3, 0, 0), Quaternion.Euler(0, 0, 0));
             sumoObj.GetComponent<Follower>().mouse = g.transform;
-            Color color = g.GetComponent<MouseController>().colour;
+            Color color = g.GetComponent<PlayerData>().color;
             color.a = 1;
             //sumoObj.GetComponent<SpriteRenderer>().color = color;
             NetworkServer.Spawn(sumoObj);

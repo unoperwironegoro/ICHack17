@@ -21,7 +21,7 @@ public class PlaneBehaviour : NetworkBehaviour {
     // Update is called once per frame
     private void Update()
     {
-        if (mouse.GetComponent<MouseController>().isDown)
+        if (mouse.GetComponent<MouseSync>().LMBDown)
         {
             if (!hasFired)
             {

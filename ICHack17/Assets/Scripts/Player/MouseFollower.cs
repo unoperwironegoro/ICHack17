@@ -3,14 +3,17 @@ using UnityEngine.Networking;
 
 public class MouseFollower : NetworkBehaviour {
 
+    [Client]
     void Start() {
         UpdatePosition();
     }
 
+    [Client]
     void Update () {
         UpdatePosition();
     }
 
+    [Client]
     private void UpdatePosition() {
         if (!isLocalPlayer) {
             return;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour {
@@ -6,7 +7,6 @@ public class SceneSwitch : MonoBehaviour {
     public bool serverSwitch;
     public Texture cutoffTex;
 
-    private float fadeTime = 1.0f;
     private float switchTimer;
     private bool switching;
 
@@ -20,7 +20,7 @@ public class SceneSwitch : MonoBehaviour {
         } else {
             switchTimer = 0;
             if (serverSwitch) {
-                NetworkCalls.nm.ServerChangeScene(nextSceneName);
+                NetworkManager.singleton.ServerChangeScene(nextSceneName);
             } else {
                 SceneManager.LoadScene(nextSceneName);
             }
@@ -29,21 +29,21 @@ public class SceneSwitch : MonoBehaviour {
     }
 
     public void NextScene(string nextSceneName) {
-        if (serverSwitch && !NetworkCalls.nm) {
+        if (serverSwitch && !NetworkManager.singleton) {
             return;
         }
         this.nextSceneName = nextSceneName;
         Fader.instance.StartEffect(cutoffTex);
         switching = true;
-        switchTimer = fadeTime;
+        switchTimer = Fader.instance.switchTime;
     }
 
     public void NextScene() {
-        if (serverSwitch && !NetworkCalls.nm) {
+        if (serverSwitch && !NetworkManager.singleton) {
             return;
         }
         Fader.instance.StartEffect(cutoffTex);
         switching = true;
-        switchTimer = fadeTime;
+        switchTimer = Fader.instance.switchTime;
     }
 }

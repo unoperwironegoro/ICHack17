@@ -18,7 +18,7 @@ public class ControlRace : NetworkBehaviour {
         foreach (GameObject g in mouseArray) {
             GameObject carObj = Instantiate(carPrefab, startPos + new Vector3(i, 0, 0), Quaternion.Euler(0, 0, 0));
             carObj.GetComponent<MouseChaser>().mouse = g;
-            carObj.GetComponent<SpriteRenderer>().color = g.GetComponent<MouseController>().colour;
+            carObj.GetComponent<SpriteRenderer>().color = g.GetComponent<PlayerData>().color;
             NetworkServer.Spawn(carObj);
             i++;
         }

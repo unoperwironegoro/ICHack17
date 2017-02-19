@@ -13,8 +13,14 @@ public class Fader : MonoBehaviour {
 
     private float transTimer;
     private float fadeTime;
+    public float switchTime { get { return fadeTime; } }
 
     void Awake() {
+        if(instance) {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject.transform.parent);
         instance = this;
         fadeTime = (totalTime - idleTime) / 2;
