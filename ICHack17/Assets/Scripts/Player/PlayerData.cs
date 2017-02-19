@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerData : NetworkBehaviour {
     public static PlayerData localClientInstance;
-    [HideInInspector][SyncVar(hook = "OnColorChangeHook")] public Color color = Color.white;
-    [HideInInspector][SyncVar(hook = "OnScoreChangeHook")] public float score = 0f;
+    [HideInInspector][SyncVar(hook = "OnColorChangeHook")] public Color color;
+    [HideInInspector][SyncVar(hook = "OnScoreChangeHook")] public float score;
 
     public delegate void ColorChange(Color c);
     public ColorChange OnColorChange;
@@ -17,14 +17,20 @@ public class PlayerData : NetworkBehaviour {
         if(isLocalPlayer) {
             localClientInstance = this;
         }
+        color = Color.white;
+        score = 0f;
     }
 
     public void OnColorChangeHook(Color c) {
-        OnColorChange(c);
+        if(OnColorChange != null) {
+            OnColorChange(c);
+        }
     }
 
     public void OnScoreChangeHook(float s) {
-        OnScoreChange(s);
+        if(OnScoreChange != null) {
+            OnScoreChange(s);
+        }
     }
 
     void Awake() {
