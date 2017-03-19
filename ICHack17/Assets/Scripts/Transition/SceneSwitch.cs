@@ -28,6 +28,10 @@ public class SceneSwitch : MonoBehaviour {
         }
     }
 
+    public void NextMinigame() {
+        NextScene(MinigameManager.singleton.ConsumeUnplayedMinigame());
+    }
+
     public void NextScene(string nextSceneName) {
         if (serverSwitch && !NetworkManager.singleton) {
             return;

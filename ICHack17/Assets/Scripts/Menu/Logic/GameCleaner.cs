@@ -14,5 +14,6 @@ public class GameCleaner : MonoBehaviour {
         }
 
         Destroy(NetworkManager.singleton.gameObject);
+        Destroy(MinigameManager.singleton.gameObject);
     }
 }
